@@ -1,0 +1,2 @@
+# smabot
+ICT SMART MONEY AI SIGNAL BOT

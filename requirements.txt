@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+SQLAlchemy==2.0.21
+asyncpg
+alembic
+aioredis
+python-telegram-bot[aio]==20.4
+pandas
+numpy
+ccxt
+apscheduler
+pydantic
+python-dotenv
+cryptography
+passlib[bcrypt]
+httpx

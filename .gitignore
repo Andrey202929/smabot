@@ -1,0 +1,17 @@
+__pycache__/
+.env
+.env.*
+*.pyc
+__pypackages__/
+.vscode/
+.idea/
+.DS_Store
+/node_modules
+
+# docker
+*.log
+*.sqlite3
+
+# local virtualenv
+venv/
+env/

@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+  db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: smabot
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      - db
+      - redis
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://postgres:password@db:5432/smabot
+      - REDIS_URL=redis://redis:6379/0
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+      - SCAN_INTERVAL_SECONDS=300
+      - MIN_CONFIDENCE=75
+    volumes:
+      - ./:/app
+    ports:
+      - "8000:8000"
+
+volumes:
+  pgdata:
